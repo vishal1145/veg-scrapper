@@ -137,7 +137,7 @@ app.get("/scrape", async (req, res) => {
   }
 });
 
-const cron = require("node-cron");
+// const cron = require("node-cron");
 
 app.get("/prices", (req, res) => {
   db.all("SELECT * FROM prices", [], (err, rows) => {
@@ -194,16 +194,16 @@ app.get("/view-email/:id", (req, res) => {
 });
 
 // Runs every day at 10:00 AM
-cron.schedule("0 10 * * *", async () => {
-  const today = dayjs().format("YYYY-MM-DD");
-  console.log(`⏰ Running daily cron job for ${today}...`);
-  try {
-    await scrapeDate("kerala", today);
-    console.log("✅ Daily cron job completed.");
-  } catch (error) {
-    console.error("❌ Daily cron job failed:", error);
-  }
-});
+// cron.schedule("0 10 * * *", async () => {
+//   const today = dayjs().format("YYYY-MM-DD");
+//   console.log(`⏰ Running daily cron job for ${today}...`);
+//   try {
+//     await scrapeDate("kerala", today);
+//     console.log("✅ Daily cron job completed.");
+//   } catch (error) {
+//     console.error("❌ Daily cron job failed:", error);
+//   }
+// });
 
 
 
@@ -217,6 +217,9 @@ app.get("/criteria", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server started on port ${PORT}`);
+// });
+
+module.exports = app;
+
