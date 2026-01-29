@@ -1,0 +1,4 @@
+Serving static files from: /home/yash-gupta/Documents/Agofolks_Projects/babco-rate/public
+Server started on port 3000
+Request: GET /scrape?startDate=2025-10-03&endDate=2025-12-26
+Request: GET /public/index.html

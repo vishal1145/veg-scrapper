@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volatility Analysis - Babco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <style>
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .chart-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        .chart-header {
+            margin-bottom: 1rem;
+        }
+        .chart-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #F8FAFC;
+            margin: 0;
+        }
+        .chart-desc {
+            font-size: 0.9rem;
+            color: #94A3B8;
+            margin-top: 0.25rem;
+        }
+        .chart-container {
+            height: 350px;
+            width: 100%;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #94A3B8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-btn:hover {
+            color: #F8FAFC;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div> -->
+
+    <div class="main-container" style="max-width: 100%; padding: 0;">
+        <header style="padding: 2rem; max-width: 1600px; margin: 0 auto;">
+            <!-- <div class="header-actions">
+                <a href="/" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Home
+                </a>
+            </div> -->
+            <h1 style="margin-top: 1rem;">Volatility Analytics <span style="background: red; padding: 0.5rem; font-size: 1rem; color: white;">Under Progress</span></h1>
+            <p>Data-driven insights for smarter decisions.</p>
+        </header>
+
+        <div class="charts-grid">
+            <!-- 1. Profit Margin Analysis -->
+            <!-- <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Profit Margin Analysis</h3>
+                    <p class="chart-desc">Top 10 vegetables by average retail margin (Retail Max - Wholesale).</p>
+                </div>
+                <div id="profitChart" class="chart-container"></div>
+            </div> -->
+
+            <!-- 2. Volatility Analysis -->
+            <div class="chart-card" style="grid-column: 1 / -1;">
+                <div class="chart-header">
+                    <h3 class="chart-title">Price Volatility Risk</h3>
+                    <p class="chart-desc">Standard deviation of wholesale prices (Last 30 Days). Higher = Riskier.</p>
+                </div>
+                <div id="volatilityChart" class="chart-container"></div>
+            </div>
+
+            <!-- 3. Day of Week Trends -->
+            <!-- <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Day-of-Week Trends</h3>
+                    <p class="chart-desc">Average wholesale price by day of the week.</p>
+                </div>
+                <div id="dayOfWeekChart" class="chart-container"></div>
+            </div> -->
+
+            <!-- 4. Market Channel Premium -->
+            <!-- <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Market Channel Premium</h3>
+                    <p class="chart-desc">Premium of Shopping Mall prices over Retail prices.</p>
+                </div>
+                <div id="channelChart" class="chart-container"></div>
+            </div> -->
+            <!-- 5. Seasonality Analysis -->
+            <!-- <div class="chart-card" style="grid-column: 1 / -1;">
+                <div class="chart-header">
+                    <h3 class="chart-title">Seasonality Analysis</h3>
+                    <p class="chart-desc">Average wholesale price by month. Darker Blue = Cheaper, Red = Expensive.</p>
+                </div>
+                <div id="seasonalityChart" class="chart-container" style="height: 500px;"></div>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="business-analytics.js"></script>
+</body>
+</html>

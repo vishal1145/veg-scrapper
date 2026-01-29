@@ -1,0 +1,58 @@
+# Vegetable Price Scraper API
+
+## Endpoints
+
+### 1. Scrape Data
+**URL:** `GET /scrape`
+
+**Parameters:**
+- `date` (optional): Scrape a specific date (Format: YYYY-MM-DD).
+- `startDate` & `endDate` (optional): Scrape a range of dates.
+- `city` (optional): City to scrape (Default: `kerala`).
+- If no dates are provided, it defaults to **today**.
+
+**Examples:**
+- **Scrape Today:**  
+  `http://localhost:3000/scrape`
+- **Scrape Specific Date:**  
+  `http://localhost:3000/scrape?date=2025-01-01`
+- **Scrape Range:**  
+  `http://localhost:3000/scrape?startDate=2025-01-01&endDate=2025-01-10`
+- **Scrape Different City:**  
+  `http://localhost:3000/scrape?city=delhi`
+
+## Database
+The data is stored in `prices.db` (SQLite).
+
+## Cron Job
+A cron job is configured to run automatically **every day at 10:00 AM**. It scrapes the data for the current date.
+
+## Email Report
+Run `node send_report.js` to generate and send a weekly price comparison email.
+
+### Send Email API
+**URL:** `POST /send-mail`
+**Body:**
+```json
+{
+    "criteria": {
+        "name": "10% increment in week",
+        "value": "10",
+        "type_value": "percentage",
+        "interval": "7 days"
+    },
+    "sendTo": ["yashgupta365ji@gmail.com"]
+}
+```
+
+## Connet to DB 
+sqlite3 prices.db
+
+delete command - DELETE FROM prices;
+get records command - SELECT * FROM prices;
+records count command - SELECT COUNT(*) FROM prices;
+get all table list - .tables
+
+SELECT * FROM EmailQueue;
+DELETE FROM EmailQueue;
+SELECT COUNT(*) FROM EmailQueue;

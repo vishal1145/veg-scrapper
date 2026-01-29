@@ -1,0 +1,26 @@
+[
+  {
+    "name": "10% increment in week",
+    "value": "10",
+    "type_value": "percentage",
+    "interval": "7 days"
+  },
+  {
+    "name": "20rs increment in week",
+    "value": "20",
+    "type_value": "absolute",
+    "interval": "7 days"
+  },
+  {
+    "name": "50rs increment in month",
+    "value": "50",
+    "type_value": "absolute",
+    "interval": "30 days"
+  },
+  {
+    "name": "5% increment in month",
+    "value": "5",
+    "type_value": "percentage",
+    "interval": "60 days"
+  }
+]

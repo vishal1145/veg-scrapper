@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraped Data - Vegetable Price Scraper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .view-container {
+            padding: 40px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .glass-panel {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div> -->
+
+    <div class="view-container">
+        <header style="margin-bottom: 30px; text-align: center;">
+            <h1>Vegetable Prices</h1>
+        </header>
+
+        <div class="glass-panel controls-panel" style="margin-bottom: 20px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <div class="control-group" style="flex: 1; min-width: 200px;">
+                <label for="search-input" style="display: block; margin-bottom: 8px; color: #cbd5e1; font-size: 0.9rem;">Search Vegetable</label>
+                <select id="search-input" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.05); color: #fff;">
+                    <option value="" style="color: #000;">All Vegetables</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label style="display: block; margin-bottom: 8px; color: #cbd5e1; font-size: 0.9rem;">Date Range</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="date" id="filter-start-date" style="padding: 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.05); color: #fff;">
+                    <span style="color: #cbd5e1;">to</span>
+                    <input type="date" id="filter-end-date" style="padding: 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.05); color: #fff;">
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel results-panel">
+            <div class="panel-header">
+                <h2>All Records</h2>
+                <span id="record-count" class="status-badge">Loading...</span>
+            </div>
+            <div id="results-container">
+                <div id="veg-table-wrapper">
+                    <table id="veg-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <!-- <th>Image</th> -->
+                                <th>Vegetable</th> 
+                                <!-- <th>City</th>  -->
+                                <th>Unit</th>
+
+                                <th>Wholesale</th>
+                                <th>Retail (Min-Max)</th>
+                                <th>Mall (Min-Max)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="veg-table-body"></tbody>
+                    </table>
+                </div>
+                
+                <div id="pagination-controls" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; align-items: center;">
+                    <button id="prev-btn" class="action-btn secondary-btn" style="padding: 8px 16px;" disabled>Previous</button>
+                    <span id="page-info" style="color: #cbd5e1;">Page 1 of 1</span>
+                    <button id="next-btn" class="action-btn secondary-btn" style="padding: 8px 16px;" disabled>Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="view.js"></script>
+</body>
+</html>

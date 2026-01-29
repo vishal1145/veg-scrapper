@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Map Graph - Babco Rate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <style>
+        :root {
+            --primary: #00E5FF;
+            --secondary: #2979FF;
+            --accent: #651FFF;
+            --background: #0F172A;
+            --surface: #1E293B;
+            --text: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --success: #00E676;
+            --glass: rgba(30, 41, 59, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(41, 121, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(101, 31, 255, 0.1) 0%, transparent 20%);
+        }
+
+        .navbar {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .header-section {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .subtitle {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .controls {
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        select {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        select:hover, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1);
+        }
+
+        .chart-container {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            height: 500px;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .trend-up {
+            color: var(--success);
+        }
+
+        .trend-down {
+            color: #FF1744;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .controls {
+                width: 100%;
+            }
+            
+            select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <nav class="navbar">
+        <a href="/" class="logo">Babco Rate</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/view.html" class="nav-link">Data View</a>
+            <a href="/moving-average-graph.html" class="nav-link active">Moving Average Graph</a>
+            <a href="/yearly-analytics.html" class="nav-link">Yearly Analytics</a>
+        </div>
+    </nav> -->
+
+    <div class="container">
+        <div class="header-section">
+            <div>
+                <h1>Heat Map Graph</h1>
+                <p class="subtitle">Visualize vegetable Seasonality</p>
+            </div>
+            <div class="controls">
+                <select id="veg-select">
+                    <option value="" disabled selected>Select Vegetable</option>
+                </select>
+                <select id="time-range">
+                    <!-- <option value="last-week">Last Week</option>
+                    <option value="last-month">Last Month</option> -->
+                    <option value="complete-data" selected>Complete Data</option>
+
+                    <option value="last-year">Last Year</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Current Price</div>
+                <div class="stat-value" id="current-price">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">6-Month Average</div>
+                <div class="stat-value" id="avg-price">-</div>
+            </div>
+        </div> -->
+
+        <div class="chart-container">
+            <h3 style="margin-bottom: 1rem; color: var(--text-secondary);">Monthly Price Heatmap (Last 5 Years)</h3>
+            <div id="seasonalityChart" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+
+    <script src="heat-map.js"></script>
+</body>
+</html>

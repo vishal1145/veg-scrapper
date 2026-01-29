@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetable Price Scraper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div> -->
+
+    <div class="main-container">
+        <header>
+            <h1 style="color: #FFFFFF;">Babco Vegetable Price Scraper</h1>
+            <p style="color: #FFFFFF;">Manage and monitor vegetable prices efficiently.</p>
+        </header>
+
+        <!-- <div class="glass-panel controls-panel">
+            <div class="control-group">
+                <label>Date Filter</label>
+                <div class="date-row">
+                    <div class="date-presets">
+                        <button id="btn-yesterday" class="preset-btn">Yesterday</button>
+                    </div>
+                    <div class="date-inputs">
+                        <input type="date" id="start-date">
+                        <span class="separator">to</span>
+                        <input type="date" id="end-date">
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="city-select">City</label>
+                <div class="select-wrapper">
+                    <select id="city-select">
+                        <option value="kerala" selected>Kerala</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="agra">Agra</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="criteria-select">Criteria</label>
+                <div class="select-wrapper">
+                    <select id="criteria-select">
+                        <option value="" disabled selected>Select Criteria</option>
+                    </select>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="actions-panel">
+            <!-- Section 1: Scraping & Data View -->
+            <div class="dashboard-section">
+                <h2 class="section-title">Scraping & Data View</h2>
+                <div class="button-grid">
+                    <button id="btn-today" class="action-btn primary-btn">
+                        <div class="btn-text">
+                            <span>Scrape Today</span>
+                            <span class="btn-subtext">Get today data</span>
+                        </div>
+                        <div class="spinner"></div>
+                    </button>
+                    <button id="btn-scrape-2025" class="action-btn primary-btn">
+                        <div class="btn-text">
+                            <span>Scrape 2025</span>
+                            <span class="btn-subtext">Get 2025 to today data</span>
+                        </div>
+                        <div class="spinner"></div>
+                    </button>
+                    <button id="btn-view-data" class="action-btn primary-btn">
+                        <div class="btn-text">
+                            <span>View Scrape data</span>
+                            <span class="btn-subtext">View all records</span>
+                        </div>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 2: Email Alerts -->
+            <div class="dashboard-section">
+                <h2 class="section-title">Email Alerts</h2>
+                <div class="button-grid">
+                    <button id="btn-mail-queue" class="action-btn secondary-btn">
+                        <div class="btn-text">
+                            <span>Test Email Alert</span>
+                            <span class="btn-subtext">Send test report in queue</span>
+                        </div>
+                        <div class="spinner"></div>
+                    </button>
+                    <button id="btn-weekly-report" class="action-btn secondary-btn">
+                        <div class="btn-text">
+                            <span>Test Weekly Report</span>
+                            <span class="btn-subtext">Send weekly report in queue</span>
+                        </div>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 3: Graphs & Analysis -->
+            <div class="dashboard-section">
+                <h2 class="section-title">Graphs & Analysis</h2>
+                <div class="button-grid">
+                    <a href="moving-average-graph.html" target="_blank" class="action-btn secondary-btn" style="text-decoration: none;">
+                        <div class="btn-text">
+                            <span>Moving Average Graph</span>
+                            <span class="btn-subtext">Visualize trends</span>
+                        </div>
+                    </a>
+                    <a href="heat-map.html" target="_blank" class="action-btn secondary-btn" style="text-decoration: none;">
+                        <div class="btn-text">
+                            <span>Heat Map Graph</span>
+                            <span class="btn-subtext">Insights & Reports</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="section-title">Further Thought/Analysis</h2>
+                <div class="button-grid">
+                    <a href="volatility-analytics.html" target="_blank" class="action-btn secondary-btn" style="text-decoration: none;">
+                        <div class="btn-text">
+                            <span>Volatility Analytics</span>
+                            <span class="btn-subtext">Insights & Reports</span>
+                        </div>
+                    </a>
+                    <a href="early-price-detection.html" target="_blank" class="action-btn secondary-btn" style="text-decoration: none;">
+                        <div class="btn-text">
+                            <span>Early Price Detection</span>
+                            <span class="btn-subtext">Track early price trends</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="glass-panel results-panel">
+            <div class="panel-header">
+                <h2>Results</h2>
+                <span id="status-badge" class="status-badge hidden">Success</span>
+            </div>
+            <div id="results-container">
+                <pre id="results-content">Select filters and click Scrape to see results...</pre>
+                <div id="veg-table-wrapper" class="hidden">
+                    <table id="veg-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Image</th>
+                                <th>Vegetable</th> 
+                                <th>City</th> 
+                                <th>Wholesale</th>
+                                <th>Retail (Min-Max)</th>
+                                <th>Mall (Min-Max)</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="veg-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div id="toaster-container" class="toaster-container"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
