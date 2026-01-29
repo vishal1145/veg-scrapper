@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const chartsGrid = document.getElementById('charts-grid');
+
     try {
         const res = await fetch('/prices');
         const data = await res.json();
         
+        // Hide loader and show charts
+        loadingSpinner.style.display = 'none';
+        chartsGrid.classList.remove('hidden');
+
         if (data.data && data.data.length > 0) {
             processAndRender(data.data);
         }
     } catch (err) {
         console.error('Error fetching data:', err);
+        loadingSpinner.innerHTML = '<p style="color: #FF1744">Failed to load data. Please try again later.</p>';
     }
 });
 

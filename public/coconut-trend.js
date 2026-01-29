@@ -5,10 +5,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const MRP = 220;
     const USAGE_FACTOR = 0.9; // 900g
+    
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const trendChart = document.getElementById('trendChart');
 
     try {
         const res = await fetch('/prices');
         const data = await res.json();
+
+        // Hide loader and show chart
+        loadingSpinner.style.display = 'none';
+        trendChart.classList.remove('hidden');
 
         if (data.data && data.data.length > 0) {
             processAndRender(data.data);
@@ -17,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (err) {
         console.error('Error fetching data:', err);
+        loadingSpinner.innerHTML = '<p style="color: #FF1744">Failed to load data. Please try again later.</p>';
     }
 
     function calculateMovingAverage(data, windowSize) {

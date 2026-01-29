@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // const currentPriceEl = document.getElementById('current-price');
     // const avgPriceEl = document.getElementById('avg-price');
     // const priceTrendEl = document.getElementById('price-trend');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const seasonalityChart = document.getElementById('seasonalityChart');
     
     let allData = [];
 
@@ -12,6 +14,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const res = await fetch('/prices');
         const data = await res.json();
         
+        // Hide loader and show chart
+        loadingSpinner.style.display = 'none';
+        seasonalityChart.classList.remove('hidden');
+
         if (data.data && data.data.length > 0) {
             allData = data.data;
             populateDropdown(allData);
@@ -23,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (err) {
         console.error('Error fetching data:', err);
+        loadingSpinner.innerHTML = '<p style="color: #FF1744">Failed to load data. Please try again later.</p>';
     }
 
     vegSelect.addEventListener('change', (e) => {

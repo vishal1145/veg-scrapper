@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const pageInfo = document.getElementById('page-info');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const vegTableWrapper = document.getElementById('veg-table-wrapper');
+    const paginationControls = document.getElementById('pagination-controls');
+
+    // Initial state handled by CSS class
 
     let allData = [];
     let filteredData = [];
@@ -17,6 +22,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const res = await fetch('/prices');
         const data = await res.json();
         
+        // Hide loader and show content
+        loadingSpinner.style.display = 'none';
+        vegTableWrapper.classList.remove('hidden');
+        paginationControls.classList.remove('hidden');
+
         if (data.data && data.data.length > 0) {
             // Sort by date descending initially
             allData = data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -31,6 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error(err);
         recordCount.textContent = 'Error';
         recordCount.classList.add('error');
+        loadingSpinner.innerHTML = '<p style="color: #f87171">Failed to load data. Please try again later.</p>';
     }
 
 
