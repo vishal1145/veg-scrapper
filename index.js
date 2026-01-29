@@ -10,7 +10,7 @@ const app = express();
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/public", express.static(path.join(__dirname, "public")));
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 let vegData = [];
 
 function deleteRecordsForDate(date, city) {
@@ -217,9 +217,9 @@ app.get("/criteria", (req, res) => {
   }
 });
 
-// app.listen(PORT, () => {
-//   console.log(`Server started on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
 
 module.exports = app;
 
